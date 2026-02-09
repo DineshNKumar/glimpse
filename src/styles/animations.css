@@ -1,0 +1,373 @@
+/* ============================================
+   ANIMATIONS & KEYFRAMES
+   All animation definitions
+   ============================================ */
+
+/* ========================================
+   KEYFRAMES
+   ======================================== */
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInScale {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes slideInRight {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+@keyframes slideInLeft {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -1000px 0;
+	}
+	100% {
+		background-position: 1000px 0;
+	}
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(0);
+		animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+	}
+	50% {
+		transform: translateY(-25%);
+		animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+	}
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+@keyframes ping {
+	75%,
+	100% {
+		transform: scale(2);
+		opacity: 0;
+	}
+}
+
+@keyframes wiggle {
+	0%,
+	100% {
+		transform: rotate(-3deg);
+	}
+	50% {
+		transform: rotate(3deg);
+	}
+}
+
+/* Gradient Animation */
+@keyframes gradientShift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/* Progress Bar Indeterminate */
+@keyframes progressIndeterminate {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(400%);
+	}
+}
+
+/* ========================================
+   ANIMATION UTILITY CLASSES
+   ======================================== */
+
+.animate-fade-in {
+	animation: fadeIn 0.5s ease-out;
+}
+
+.animate-fade-in-up {
+	animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in-down {
+	animation: fadeInDown 0.6s ease-out;
+}
+
+.animate-fade-in-scale {
+	animation: fadeInScale 0.4s ease-out;
+}
+
+.animate-slide-in-right {
+	animation: slideInRight 0.4s ease-out;
+}
+
+.animate-slide-in-left {
+	animation: slideInLeft 0.4s ease-out;
+}
+
+.animate-pulse {
+	animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-spin {
+	animation: spin 1s linear infinite;
+}
+
+.animate-bounce {
+	animation: bounce 1s infinite;
+}
+
+.animate-float {
+	animation: float 3s ease-in-out infinite;
+}
+
+.animate-ping {
+	animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-wiggle {
+	animation: wiggle 0.5s ease-in-out infinite;
+}
+
+/* ========================================
+   TRANSITION UTILITIES
+   ======================================== */
+
+.transition-all {
+	transition: all var(--transition-base);
+}
+
+.transition-colors {
+	transition:
+		color var(--transition-base),
+		background-color var(--transition-base),
+		border-color var(--transition-base);
+}
+
+.transition-opacity {
+	transition: opacity var(--transition-base);
+}
+
+.transition-transform {
+	transition: transform var(--transition-base);
+}
+
+.transition-fast {
+	transition-duration: var(--transition-fast);
+}
+
+.transition-slow {
+	transition-duration: var(--transition-slow);
+}
+
+/* ========================================
+   HOVER EFFECTS
+   ======================================== */
+
+.hover-lift:hover {
+	transform: translateY(-4px);
+}
+
+.hover-grow:hover {
+	transform: scale(1.05);
+}
+
+.hover-glow:hover {
+	box-shadow: var(--shadow-glow);
+}
+
+.hover-brightness:hover {
+	filter: brightness(1.1);
+}
+
+/* ========================================
+   LOADING STATES
+   ======================================== */
+
+.skeleton {
+	background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s infinite;
+	border-radius: var(--radius-md);
+}
+
+.skeleton-text {
+	height: 1em;
+	margin-bottom: 0.5em;
+}
+
+.skeleton-circle {
+	border-radius: var(--radius-full);
+	aspect-ratio: 1;
+}
+
+/* ========================================
+   STAGGER ANIMATIONS (for children)
+   ======================================== */
+
+.stagger-fade-in > * {
+	animation: fadeIn 0.5s ease-out backwards;
+}
+
+.stagger-fade-in > *:nth-child(1) {
+	animation-delay: 0.05s;
+}
+.stagger-fade-in > *:nth-child(2) {
+	animation-delay: 0.1s;
+}
+.stagger-fade-in > *:nth-child(3) {
+	animation-delay: 0.15s;
+}
+.stagger-fade-in > *:nth-child(4) {
+	animation-delay: 0.2s;
+}
+.stagger-fade-in > *:nth-child(5) {
+	animation-delay: 0.25s;
+}
+.stagger-fade-in > *:nth-child(6) {
+	animation-delay: 0.3s;
+}
+
+/* ========================================
+   ANIMATED GRADIENT BACKGROUNDS
+   ======================================== */
+
+.bg-gradient-animated {
+	background: linear-gradient(270deg, var(--primary-500), var(--ai-from), var(--ai-to));
+	background-size: 400% 400%;
+	animation: gradientShift 8s ease infinite;
+}
+
+/* ========================================
+   INDETERMINATE PROGRESS
+   ======================================== */
+
+.progress-indeterminate {
+	position: relative;
+	overflow: hidden;
+}
+
+.progress-indeterminate::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 25%;
+	background: var(--primary-500);
+	animation: progressIndeterminate 1.5s ease-in-out infinite;
+}
+
+/* ========================================
+   ENTRANCE ANIMATIONS (Page Load)
+   ======================================== */
+
+.entrance-1 {
+	animation: fadeInUp 0.6s ease-out 0.1s backwards;
+}
+
+.entrance-2 {
+	animation: fadeInUp 0.6s ease-out 0.2s backwards;
+}
+
+.entrance-3 {
+	animation: fadeInUp 0.6s ease-out 0.3s backwards;
+}
+
+.entrance-4 {
+	animation: fadeInUp 0.6s ease-out 0.4s backwards;
+}
+
+/* ========================================
+   REDUCE MOTION (Accessibility)
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
