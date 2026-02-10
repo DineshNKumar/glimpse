@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { Icon } from '$lib/components';
 
 	let isDragging = $state(false);
@@ -7,18 +6,6 @@
 	let uploadProgress = $state(0);
 	let isUploading = $state(false);
 	let showAIFeatures = $state(false);
-
-	// Dark mode toggle
-	let isDarkMode = $state(false);
-
-	function toggleDarkMode() {
-		isDarkMode = !isDarkMode;
-		if (isDarkMode) {
-			document.documentElement.classList.add('dark');
-		} else {
-			document.documentElement.classList.remove('dark');
-		}
-	}
 
 	// File upload handlers
 	function handleDragOver(e: DragEvent) {
@@ -83,33 +70,46 @@
 	function getFileIcon(fileName: string): string {
 		const ext = fileName.split('.').pop()?.toLowerCase();
 		const icons: Record<string, string> = {
-			'pdf': 'file',
-			'doc': 'file',
-			'docx': 'file',
-			'xls': 'file',
-			'xlsx': 'file',
-			'ppt': 'file',
-			'pptx': 'file',
-			'jpg': 'image',
-			'jpeg': 'image',
-			'png': 'image',
-			'gif': 'image',
-			'svg': 'image',
-			'mp4': 'video',
-			'mp3': 'music',
-			'zip': 'archive',
-			'rar': 'archive',
-			'txt': 'file'
+			'pdf': 'file-pdf',
+			'doc': 'file-text',
+			'docx': 'file-text',
+			'xls': 'file-text',
+			'xlsx': 'file-text',
+			'ppt': 'file-text',
+			'pptx': 'file-text',
+			'txt': 'file-text',
+			'jpg': 'file-image',
+			'jpeg': 'file-image',
+			'png': 'file-image',
+			'gif': 'file-image',
+			'svg': 'file-image',
+			'webp': 'file-image',
+			'mp4': 'file-video',
+			'mov': 'file-video',
+			'avi': 'file-video',
+			'webm': 'file-video',
+			'mp3': 'file-audio',
+			'wav': 'file-audio',
+			'ogg': 'file-audio',
+			'zip': 'file-zip',
+			'rar': 'file-zip',
+			'7z': 'file-zip',
+			'tar': 'file-zip',
+			'gz': 'file-zip',
+			'js': 'file-code',
+			'ts': 'file-code',
+			'jsx': 'file-code',
+			'tsx': 'file-code',
+			'py': 'file-code',
+			'java': 'file-code',
+			'cpp': 'file-code',
+			'c': 'file-code',
+			'html': 'file-code',
+			'css': 'file-code',
+			'json': 'file-code'
 		};
-		return icons[ext || ''] || 'folder';
+		return icons[ext || ''] || 'file-text';
 	}
-
-	onMount(() => {
-		// Check for saved dark mode preference
-		if (localStorage.getItem('darkMode') === 'true') {
-			toggleDarkMode();
-		}
-	});
 </script>
 
 <!-- Navigation -->
@@ -137,10 +137,10 @@
 				<a href="#features" class="nav-link">Features</a>
 				<a href="#how-it-works" class="nav-link hidden-mobile">How it works</a>
 				<a href="#pricing" class="nav-link hidden-mobile">Pricing</a>
-				<button class="btn btn-secondary btn-sm" onclick={toggleDarkMode}>
-					{isDarkMode ? '☀️' : '🌙'}
-				</button>
-				<button class="btn btn-primary btn-sm">Sign In</button>
+				<a href="/login" class="btn btn-primary btn-sm">
+					<Icon name="log-in" size={18} />
+					<span>Sign In</span>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -167,6 +167,8 @@
 			<div class="upload-container animate-fade-in">
 				<div 
 					class="upload-zone {isDragging ? 'upload-zone-dragging' : ''} {uploadedFiles.length > 0 ? 'upload-zone-active' : ''}"
+					role="button"
+					tabindex="0"
 					ondragover={handleDragOver}
 					ondragleave={handleDragLeave}
 					ondrop={handleDrop}
@@ -174,10 +176,7 @@
 					{#if uploadedFiles.length === 0}
 						<div class="upload-placeholder">
 							<div class="upload-icon">
-								<svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-									<circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" opacity="0.3"/>
-									<path d="M32 20V44M20 32H44" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-								</svg>
+								<Icon name="cloud-upload" size={64} />
 							</div>
 							<h3 class="upload-title">Drop files here or click to browse</h3>
 							<p class="upload-text">
@@ -190,8 +189,8 @@
 								onchange={handleFileInput}
 							/>
 							<button class="btn btn-primary btn-lg">
+								<Icon name="folder-open" size={20} />
 								<span>Choose Files</span>
-								<Icon name="folder" size={20} />
 							</button>
 						</div>
 					{:else}
@@ -394,15 +393,39 @@
 				<div class="feature-showcase-visual">
 					<div class="preview-card">
 						<div class="preview-header">
-							<span>📄</span>
-							<span class="badge badge-ai">AI Analyzed</span>
+							<div class="preview-icon">
+								<Icon name="file-text" size={32} />
+							</div>
+							<div class="badge badge-ai animate-pulse">
+								<Icon name="sparkles" size={14} />
+								AI Analyzed
+							</div>
 						</div>
 						<div class="preview-content">
+							<div class="preview-thumbnail">
+								<span class="preview-icon-wrapper">
+									<Icon name="image" size={48} />
+								</span>
+							</div>
 							<div class="preview-lines">
-								<div class="preview-line" style="width: 90%"></div>
-								<div class="preview-line" style="width: 75%"></div>
-								<div class="preview-line" style="width: 95%"></div>
-								<div class="preview-line" style="width: 60%"></div>
+								<div class="preview-line animate-shimmer" style="width: 90%"></div>
+								<div class="preview-line animate-shimmer" style="width: 75%; animation-delay: 0.1s"></div>
+								<div class="preview-line animate-shimmer" style="width: 95%; animation-delay: 0.2s"></div>
+								<div class="preview-line animate-shimmer" style="width: 60%; animation-delay: 0.3s"></div>
+							</div>
+							<div class="preview-metadata">
+								<div class="metadata-item">
+									<Icon name="file-text" size={16} />
+									<span>Document</span>
+								</div>
+								<div class="metadata-item">
+									<Icon name="check-circle" size={16} />
+									<span>Safe</span>
+								</div>
+								<div class="metadata-item">
+									<Icon name="clock-history" size={16} />
+									<span>2m ago</span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -414,10 +437,22 @@
 						Recipients see what they're downloading before committing bandwidth.
 					</p>
 					<ul class="feature-list">
-						<li>✓ Auto-generated thumbnails</li>
-						<li>✓ Document text extraction</li>
-						<li>✓ Metadata analysis</li>
-						<li>✓ Content safety scoring</li>
+						<li>
+							<Icon name="image" size={20} />
+							<span>Auto-generated thumbnails</span>
+						</li>
+						<li>
+							<Icon name="file-text" size={20} />
+							<span>Document text extraction</span>
+						</li>
+						<li>
+							<Icon name="database" size={20} />
+							<span>Metadata analysis</span>
+						</li>
+						<li>
+							<Icon name="shield-check" size={20} />
+							<span>Content safety scoring</span>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -509,9 +544,15 @@
 		<div class="footer-bottom">
 			<p class="footer-copyright">© 2026 Glimpse. All rights reserved.</p>
 			<div class="footer-social">
-				<a href="#twitter" class="social-link" aria-label="Twitter">𝕏</a>
-				<a href="#github" class="social-link" aria-label="GitHub">⚡</a>
-				<a href="#discord" class="social-link" aria-label="Discord">💬</a>
+				<a href="#twitter" class="social-link" aria-label="Twitter">
+					<Icon name="at-sign" size={20} />
+				</a>
+				<a href="#github" class="social-link" aria-label="GitHub">
+					<Icon name="git-branch" size={20} />
+				</a>
+				<a href="#discord" class="social-link" aria-label="Discord">
+					<Icon name="message-circle" size={20} />
+				</a>
 			</div>
 		</div>
 	</div>
@@ -830,11 +871,25 @@
 		border-radius: var(--radius-xl);
 		text-align: center;
 		border: 1px solid var(--gray-200);
+		transition: all 0.3s ease;
+	}
+
+	.feature-card:hover {
+		border-color: var(--primary-500);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
 	}
 
 	.feature-icon {
-		font-size: var(--text-4xl);
-		margin-bottom: var(--space-3);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 64px;
+		height: 64px;
+		margin: 0 auto var(--space-4);
+		background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+		border-radius: var(--radius-xl);
+		color: white;
 	}
 
 	.feature-card-title {
@@ -975,6 +1030,14 @@
 		border-radius: var(--radius-xl);
 		padding: var(--space-6);
 		box-shadow: var(--shadow-xl);
+		border: 2px solid var(--gray-100);
+		transition: all 0.3s ease;
+	}
+
+	.preview-card:hover {
+		box-shadow: var(--shadow-ai);
+		transform: translateY(-4px);
+		border-color: var(--primary-200);
 	}
 
 	.preview-header {
@@ -982,7 +1045,58 @@
 		justify-content: space-between;
 		align-items: center;
 		margin-bottom: var(--space-6);
-		font-size: var(--text-2xl);
+		padding-bottom: var(--space-4);
+		border-bottom: 2px solid var(--gray-100);
+	}
+
+	.preview-icon {
+		width: 48px;
+		height: 48px;
+		background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+		border-radius: var(--radius-lg);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+	}
+
+	.preview-content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
+	}
+
+	.preview-thumbnail {
+		width: 100%;
+		height: 120px;
+		background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-50) 100%);
+		border-radius: var(--radius-lg);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--gray-400);
+		margin-bottom: var(--space-2);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.preview-thumbnail::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(90deg, 
+			transparent 0%, 
+			rgba(139, 92, 246, 0.1) 50%, 
+			transparent 100%);
+		animation: shimmer 2s infinite;
+	}
+
+	.preview-icon-wrapper {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.preview-lines {
@@ -993,9 +1107,38 @@
 
 	.preview-line {
 		height: 12px;
-		background: var(--gray-200);
+		background: linear-gradient(90deg, 
+			var(--gray-200) 0%, 
+			var(--gray-100) 50%, 
+			var(--gray-200) 100%);
+		background-size: 200% 100%;
 		border-radius: var(--radius-md);
-		animation: pulse 2s ease-in-out infinite;
+	}
+
+	.animate-shimmer {
+		animation: shimmer 2s ease-in-out infinite;
+	}
+
+	.preview-metadata {
+		display: flex;
+		gap: var(--space-4);
+		padding-top: var(--space-4);
+		border-top: 1px solid var(--gray-100);
+	}
+
+	.metadata-item {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		font-size: var(--text-xs);
+		color: var(--gray-600);
+		padding: var(--space-2) var(--space-3);
+		background: var(--gray-50);
+		border-radius: var(--radius-md);
+	}
+
+	.metadata-item span {
+		font-weight: var(--font-medium);
 	}
 
 	.security-card {
@@ -1050,12 +1193,32 @@
 		list-style: none;
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-3);
+		gap: var(--space-4);
+		margin: 0;
+		padding: 0;
 	}
 
 	.feature-list li {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
 		color: var(--gray-700);
 		font-size: var(--text-base);
+		padding: var(--space-3);
+		background: var(--gray-50);
+		border-radius: var(--radius-lg);
+		border-left: 3px solid var(--primary-500);
+		transition: all 0.2s ease;
+	}
+
+	.feature-list li:hover {
+		background: white;
+		box-shadow: var(--shadow-sm);
+		transform: translateX(4px);
+	}
+
+	.feature-list li span {
+		font-weight: var(--font-medium);
 	}
 
 	/* === FOOTER === */
@@ -1196,5 +1359,28 @@
 			gap: var(--space-4);
 			text-align: center;
 		}
+	}
+
+	/* === ANIMATIONS === */
+	@keyframes shimmer {
+		0% {
+			background-position: 200% 0;
+		}
+		100% {
+			background-position: -200% 0;
+		}
+	}
+
+	@keyframes pulse {
+		0%, 100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.5;
+		}
+	}
+
+	.animate-pulse {
+		animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 	}
 </style>

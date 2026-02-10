@@ -1,0 +1,8 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+	<title>QR Code</title>
+	<rect x="3" y="3" width="8" height="8" rx="1"/>
+	<rect x="13" y="3" width="8" height="8" rx="1"/>
+	<rect x="3" y="13" width="8" height="8" rx="1"/>
+	<rect x="17" y="17" width="4" height="4"/>
+	<rect x="13" y="13" width="4" height="4"/>
+</svg>

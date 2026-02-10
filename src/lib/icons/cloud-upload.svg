@@ -1,0 +1,6 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+	<title>Cloud Upload</title>
+	<path d="M4 16.24C2.79401 15.2713 2 13.7596 2 12C2 9.23858 4.23858 7 7 7C7.35064 7 7.69381 7.03046 8.02721 7.08869C8.56393 4.17956 11.0593 2 14 2C17.3137 2 20 4.68629 20 8C20 8.35064 19.9695 8.69381 19.9113 9.02721C21.6529 9.54616 22.8986 11.1103 22.9928 13C23.2944 14.8107 22.0113 16.4915 20.1753 16.9991"/>
+	<polyline points="12 12 12 21"/>
+	<polyline points="16 16 12 12 8 16"/>
+</svg>

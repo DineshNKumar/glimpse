@@ -1,6 +1,8 @@
 <script lang="ts">
+	import type { IconName } from '$lib/icons';
+
 	interface Props {
-		name: string;
+		name: string | IconName;
 		size?: number | string;
 		class?: string;
 	}
@@ -15,9 +17,11 @@
 	}) as Record<string, string>;
 
 	function getIconContent(): string {
-		// Try to find the icon file
-		const iconPath = `/src/lib/icons/${name}.svg`;
-		const iconKey = Object.keys(iconModules).find(key => key.includes(`/${name}.svg`));
+		// Try to find the icon file - handle both regular names and names with special characters
+		const iconKey = Object.keys(iconModules).find(key => {
+			const keyName = key.split('/').pop()?.replace('.svg', '');
+			return keyName === name;
+		});
 		
 		if (iconKey && iconModules[iconKey]) {
 			// Extract the SVG content without the wrapper
