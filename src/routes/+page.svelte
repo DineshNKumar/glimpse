@@ -303,22 +303,37 @@
 			</div>
 
 			<!-- Stats -->
-			<div class="stats">
-				<div class="stat">
-					<div class="stat-value">10M+</div>
-					<div class="stat-label">Files Shared</div>
-				</div>
-				<div class="stat">
-					<div class="stat-value">500K+</div>
-					<div class="stat-label">Active Users</div>
-				</div>
-				<div class="stat">
-					<div class="stat-value">99.9%</div>
-					<div class="stat-label">Uptime</div>
-				</div>
-				<div class="stat">
-					<div class="stat-value">256-bit</div>
-					<div class="stat-label">Encryption</div>
+			<div class="stats-container">
+				<h3 class="stats-heading">Trusted by thousands worldwide</h3>
+				<div class="stats">
+					<div class="stat">
+						<div class="stat-icon">
+							<Icon name="file-text" size={28} />
+						</div>
+						<div class="stat-value">10M+</div>
+						<div class="stat-label">Files Shared</div>
+					</div>
+					<div class="stat">
+						<div class="stat-icon">
+							<Icon name="users" size={28} />
+						</div>
+						<div class="stat-value">500K+</div>
+						<div class="stat-label">Active Users</div>
+					</div>
+					<div class="stat">
+						<div class="stat-icon">
+							<Icon name="activity" size={28} />
+						</div>
+						<div class="stat-value">99.9%</div>
+						<div class="stat-label">Uptime</div>
+					</div>
+					<div class="stat">
+						<div class="stat-icon">
+							<Icon name="shield" size={28} />
+						</div>
+						<div class="stat-value">256-bit</div>
+						<div class="stat-label">Encryption</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -896,30 +911,70 @@
 	}
 
 	/* === STATS === */
-	.stats {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-		gap: var(--space-8);
+	.stats-container {
 		margin-top: var(--space-16);
 		padding-top: var(--space-12);
 		border-top: 1px solid var(--gray-200);
 	}
 
-	.stat {
+	.stats-heading {
+		font-size: var(--text-2xl);
+		font-weight: var(--font-bold);
+		color: var(--gray-900);
 		text-align: center;
+		margin-bottom: var(--space-8);
+	}
+
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: var(--space-6);
+	}
+
+	.stat {
+		background: white;
+		border: 2px solid var(--gray-200);
+		border-radius: var(--radius-2xl);
+		padding: var(--space-8);
+		text-align: center;
+		transition: all var(--transition-base);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	}
+
+	.stat:hover {
+		border-color: var(--primary-300);
+		transform: translateY(-4px);
+		box-shadow: 0 12px 24px rgba(103, 126, 234, 0.15);
+	}
+
+	.stat-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 64px;
+		height: 64px;
+		margin: 0 auto var(--space-4);
+		background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+		border-radius: var(--radius-2xl);
+		color: white;
+		box-shadow: 0 4px 12px rgba(103, 126, 234, 0.3);
 	}
 
 	.stat-value {
-		font-size: var(--text-3xl);
-		font-weight: var(--font-bold);
-		color: var(--primary-500);
+		font-size: var(--text-4xl);
+		font-weight: var(--font-black);
+		background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
 		margin-bottom: var(--space-2);
+		line-height: 1;
 	}
 
 	.stat-label {
-		font-size: var(--text-sm);
+		font-size: var(--text-base);
 		color: var(--gray-600);
-		font-weight: var(--font-medium);
+		font-weight: var(--font-semibold);
 	}
 
 	/* === SECTIONS === */

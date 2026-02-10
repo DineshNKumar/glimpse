@@ -78,17 +78,36 @@
 
 				<!-- Stats -->
 				<div class="auth-stats">
-					<div class="stat-item">
-						<div class="stat-value">10M+</div>
-						<div class="stat-label">Files Shared</div>
-					</div>
-					<div class="stat-item">
-						<div class="stat-value">500K+</div>
-						<div class="stat-label">Happy Users</div>
-					</div>
-					<div class="stat-item">
-						<div class="stat-value">99.9%</div>
-						<div class="stat-label">Uptime</div>
+					<h3 class="stats-title">Trusted by thousands</h3>
+					<div class="stats-grid">
+						<div class="stat-card">
+							<div class="stat-icon">
+								<Icon name="file-text" size={24} />
+							</div>
+							<div class="stat-value">10M+</div>
+							<div class="stat-label">Files Shared</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-icon">
+								<Icon name="users" size={24} />
+							</div>
+							<div class="stat-value">500K+</div>
+							<div class="stat-label">Active Users</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-icon">
+								<Icon name="activity" size={24} />
+							</div>
+							<div class="stat-value">99.9%</div>
+							<div class="stat-label">Uptime</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-icon">
+								<Icon name="shield" size={24} />
+							</div>
+							<div class="stat-value">256-bit</div>
+							<div class="stat-label">Encryption</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -334,28 +353,66 @@
 	}
 
 	.auth-stats {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: var(--space-6);
+		margin-top: var(--space-8);
 		padding-top: var(--space-8);
-		border-top: 1px solid rgba(255, 255, 255, 0.2);
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
 	}
 
-	.stat-item {
+	.stats-title {
+		font-size: var(--text-lg);
+		font-weight: var(--font-bold);
+		color: white;
+		margin-bottom: var(--space-6);
 		text-align: center;
 	}
 
-	.stat-value {
-		font-size: var(--text-2xl);
-		font-weight: var(--font-bold);
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--space-4);
+	}
+
+	.stat-card {
+		background: rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(10px);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		border-radius: var(--radius-xl);
+		padding: var(--space-5);
+		text-align: center;
+		transition: all var(--transition-base);
+	}
+
+	.stat-card:hover {
+		background: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.25);
+		transform: translateY(-2px);
+	}
+
+	.stat-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 48px;
+		margin: 0 auto var(--space-3);
+		background: rgba(255, 255, 255, 0.15);
+		border-radius: var(--radius-xl);
 		color: white;
-		margin-bottom: var(--space-1);
+	}
+
+	.stat-value {
+		font-size: var(--text-3xl);
+		font-weight: var(--font-black);
+		color: white;
+		margin-bottom: var(--space-2);
+		line-height: 1;
 	}
 
 	.stat-label {
-		font-size: var(--text-xs);
-		opacity: 0.85;
+		font-size: var(--text-sm);
 		color: white;
+		opacity: 0.85;
+		font-weight: var(--font-medium);
 	}
 
 	/* === FORM SIDE === */
