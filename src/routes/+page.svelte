@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Icon } from '$lib/components';
+	import { Icon, Logo } from '$lib/components';
 
 	let isDragging = $state(false);
 	let uploadedFiles = $state<File[]>([]);
@@ -113,22 +113,13 @@
 </script>
 
 <!-- Navigation -->
+ 
 <nav class="nav">
 	<div class="container">
 		<div class="nav-content">
 			<div class="nav-brand">
 				<div class="logo">
-					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect width="32" height="32" rx="8" fill="url(#logo-gradient)"/>
-						<path d="M16 8L8 16L16 24L24 16L16 8Z" fill="white" opacity="0.9"/>
-						<circle cx="16" cy="16" r="3" fill="white"/>
-						<defs>
-							<linearGradient id="logo-gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-								<stop stop-color="#8b5cf6"/>
-								<stop offset="1" stop-color="#6366f1"/>
-							</linearGradient>
-						</defs>
-					</svg>
+					<Logo size={32} />
 					<span class="logo-text">Glimpse</span>
 				</div>
 			</div>
@@ -436,24 +427,24 @@
 						AI-powered previews for documents, images, videos, and more. 
 						Recipients see what they're downloading before committing bandwidth.
 					</p>
-					<ul class="feature-list">
-						<li>
-							<Icon name="image" size={20} />
+					<div class="feature-list">
+						<div class="feature-item">
+							<Icon name="check" size={18} />
 							<span>Auto-generated thumbnails</span>
-						</li>
-						<li>
-							<Icon name="file-text" size={20} />
+						</div>
+						<div class="feature-item">
+							<Icon name="check" size={18} />
 							<span>Document text extraction</span>
-						</li>
-						<li>
-							<Icon name="database" size={20} />
+						</div>
+						<div class="feature-item">
+							<Icon name="check" size={18} />
 							<span>Metadata analysis</span>
-						</li>
-						<li>
-							<Icon name="shield-check" size={20} />
+						</div>
+						<div class="feature-item">
+							<Icon name="check" size={18} />
 							<span>Content safety scoring</span>
-						</li>
-					</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -501,17 +492,7 @@
 		<div class="footer-content">
 			<div class="footer-brand">
 				<div class="logo">
-					<svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-						<rect width="32" height="32" rx="8" fill="url(#footer-logo-gradient)"/>
-						<path d="M16 8L8 16L16 24L24 16L16 8Z" fill="white" opacity="0.9"/>
-						<circle cx="16" cy="16" r="3" fill="white"/>
-						<defs>
-							<linearGradient id="footer-logo-gradient" x1="0" y1="0" x2="32" y2="32">
-								<stop stop-color="#8b5cf6"/>
-								<stop offset="1" stop-color="#6366f1"/>
-							</linearGradient>
-						</defs>
-					</svg>
+					<Logo size={32} />
 					<span class="logo-text">Glimpse</span>
 				</div>
 				<p class="footer-tagline">See before you download</p>
@@ -610,6 +591,15 @@
 
 	.nav-link:hover {
 		color: var(--gray-900);
+	}
+
+	/* Ensure button links maintain proper color */
+	.nav-links .btn-primary {
+		color: white;
+	}
+
+	.nav-links .btn-primary:hover {
+		color: white;
 	}
 
 	/* === HERO SECTION === */
@@ -1190,35 +1180,29 @@
 	}
 
 	.feature-list {
-		list-style: none;
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-4);
+		gap: var(--space-3);
 		margin: 0;
 		padding: 0;
 	}
 
-	.feature-list li {
+	.feature-item {
 		display: flex;
 		align-items: center;
 		gap: var(--space-3);
 		color: var(--gray-700);
 		font-size: var(--text-base);
-		padding: var(--space-3);
-		background: var(--gray-50);
-		border-radius: var(--radius-lg);
-		border-left: 3px solid var(--primary-500);
-		transition: all 0.2s ease;
 	}
 
-	.feature-list li:hover {
-		background: white;
-		box-shadow: var(--shadow-sm);
-		transform: translateX(4px);
+	.feature-item :global(svg) {
+		flex-shrink: 0;
+		color: var(--primary-500);
 	}
 
-	.feature-list li span {
-		font-weight: var(--font-medium);
+	.feature-item span {
+		font-weight: var(--font-normal);
+		line-height: 1.5;
 	}
 
 	/* === FOOTER === */

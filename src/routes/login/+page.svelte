@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Icon, Button, Badge } from '$lib/components';
+	import Logo from '$lib/components/Logo.svelte';
 
 	let email = $state('');
 	let password = $state('');
@@ -37,17 +38,7 @@
 				<!-- Logo -->
 				<a href="/" class="logo-link">
 					<div class="logo-large">
-						<svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-							<rect width="64" height="64" rx="16" fill="url(#login-gradient)" />
-							<path d="M32 16L16 32L32 48L48 32L32 16Z" fill="white" opacity="0.9" />
-							<circle cx="32" cy="32" r="6" fill="white" />
-							<defs>
-								<linearGradient id="login-gradient" x1="0" y1="0" x2="64" y2="64">
-									<stop stop-color="#8b5cf6" />
-									<stop offset="1" stop-color="#6366f1" />
-								</linearGradient>
-							</defs>
-						</svg>
+						<Logo size={78} />
 					</div>
 					<h1 class="brand-name">Glimpse</h1>
 				</a>
