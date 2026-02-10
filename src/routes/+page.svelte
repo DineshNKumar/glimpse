@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { Icon } from '$lib/components';
 
 	let isDragging = $state(false);
 	let uploadedFiles = $state<File[]>([]);
@@ -82,25 +83,25 @@
 	function getFileIcon(fileName: string): string {
 		const ext = fileName.split('.').pop()?.toLowerCase();
 		const icons: Record<string, string> = {
-			'pdf': '📄',
-			'doc': '📝',
-			'docx': '📝',
-			'xls': '📊',
-			'xlsx': '📊',
-			'ppt': '📽️',
-			'pptx': '📽️',
-			'jpg': '🖼️',
-			'jpeg': '🖼️',
-			'png': '🖼️',
-			'gif': '🖼️',
-			'svg': '🎨',
-			'mp4': '🎬',
-			'mp3': '🎵',
-			'zip': '📦',
-			'rar': '📦',
-			'txt': '📃'
+			'pdf': 'file',
+			'doc': 'file',
+			'docx': 'file',
+			'xls': 'file',
+			'xlsx': 'file',
+			'ppt': 'file',
+			'pptx': 'file',
+			'jpg': 'image',
+			'jpeg': 'image',
+			'png': 'image',
+			'gif': 'image',
+			'svg': 'image',
+			'mp4': 'video',
+			'mp3': 'music',
+			'zip': 'archive',
+			'rar': 'archive',
+			'txt': 'file'
 		};
-		return icons[ext || ''] || '📁';
+		return icons[ext || ''] || 'folder';
 	}
 
 	onMount(() => {
@@ -148,9 +149,9 @@
 <!-- Hero Section -->
 <section class="hero">
 	<div class="container">
-		<div class="hero-content">
-			<div class="badge badge-ai animate-fade-in">
-				✨ AI-Powered File Intelligence
+		<div class="hero-content">							<div class="badge badge-ai animate-fade-in">
+				<Icon name="sparkles" size={16} />
+				AI-Powered File Intelligence
 			</div>
 			
 			<h1 class="hero-title animate-fade-in">
@@ -190,7 +191,7 @@
 							/>
 							<button class="btn btn-primary btn-lg">
 								<span>Choose Files</span>
-								<span>📁</span>
+								<Icon name="folder" size={20} />
 							</button>
 						</div>
 					{:else}
@@ -207,7 +208,7 @@
 							{#each uploadedFiles as file, index}
 								<div class="file-item">
 									<div class="file-icon-wrapper">
-										<span class="file-icon-emoji">{getFileIcon(file.name)}</span>
+										<Icon name={getFileIcon(file.name)} size={24} />
 									</div>
 									<div class="file-info">
 										<div class="file-name">{file.name}</div>
@@ -228,7 +229,7 @@
 										onclick={() => removeFile(index)}
 										aria-label="Remove file"
 									>
-										✕
+										<Icon name="x" size={16} />
 									</button>
 								</div>
 							{/each}
@@ -245,21 +246,21 @@
 							{#if showAIFeatures && !isUploading}
 								<div class="ai-features">
 									<div class="ai-feature">
-										<span class="ai-icon">🛡️</span>
+										<span class="ai-icon"><Icon name="shield" size={20} /></span>
 										<div>
 											<div class="ai-feature-title">Security Scan Complete</div>
 											<div class="ai-feature-text">No threats detected</div>
 										</div>
 									</div>
 									<div class="ai-feature">
-										<span class="ai-icon">🔍</span>
+										<span class="ai-icon"><Icon name="search" size={20} /></span>
 										<div>
 											<div class="ai-feature-title">Content Analysis</div>
 											<div class="ai-feature-text">Preview available for recipients</div>
 										</div>
 									</div>
 									<div class="ai-feature">
-										<span class="ai-icon">⚡</span>
+										<span class="ai-icon"><Icon name="zap" size={20} /></span>
 										<div>
 											<div class="ai-feature-title">Smart Compression</div>
 											<div class="ai-feature-text">Optimized for faster transfer</div>
@@ -270,7 +271,7 @@
 								<div class="upload-actions">
 									<button class="btn btn-ai btn-lg" style="width: 100%;">
 										<span>Generate Share Link</span>
-										<span>✨</span>
+										<Icon name="sparkles" size={20} />
 									</button>
 								</div>
 							{/if}
@@ -281,22 +282,30 @@
 				<!-- Features Grid -->
 				<div class="features-grid">
 					<div class="feature-card">
-						<div class="feature-icon">🔒</div>
+						<div class="feature-icon">
+							<Icon name="lock" size={32} />
+						</div>
 						<h4 class="feature-card-title">End-to-End Encrypted</h4>
 						<p class="feature-card-text">Your files are encrypted before upload</p>
 					</div>
 					<div class="feature-card">
-						<div class="feature-icon">👁️</div>
+						<div class="feature-icon">
+							<Icon name="eye" size={32} />
+						</div>
 						<h4 class="feature-card-title">Visual Preview</h4>
 						<p class="feature-card-text">See thumbnails before downloading</p>
 					</div>
 					<div class="feature-card">
-						<div class="feature-icon">🤖</div>
+						<div class="feature-icon">
+							<Icon name="robot" size={32} />
+						</div>
 						<h4 class="feature-card-title">AI Analysis</h4>
 						<p class="feature-card-text">Automatic content detection</p>
 					</div>
 					<div class="feature-card">
-						<div class="feature-icon">⚡</div>
+						<div class="feature-icon">
+							<Icon name="zap" size={32} />
+						</div>
 						<h4 class="feature-card-title">Lightning Fast</h4>
 						<p class="feature-card-text">Optimized transfer speeds</p>
 					</div>
@@ -417,9 +426,15 @@
 				<div class="feature-showcase-visual">
 					<div class="security-card">
 						<div class="security-shields">
-							<div class="security-shield">🛡️</div>
-							<div class="security-shield">🔒</div>
-							<div class="security-shield">✓</div>
+							<div class="security-shield">
+								<Icon name="shield" size={48} />
+							</div>
+							<div class="security-shield">
+								<Icon name="lock" size={48} />
+							</div>
+							<div class="security-shield">
+								<Icon name="check" size={48} />
+							</div>
 						</div>
 						<div class="security-status">
 							<div class="security-label">Security Status</div>

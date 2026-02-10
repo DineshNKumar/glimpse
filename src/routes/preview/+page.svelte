@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { Icon } from '$lib/components';
 
 	// Mock file data
 	let fileData = $state({
@@ -132,7 +133,9 @@
 				<!-- Password Protection -->
 				<div class="password-screen animate-fade-in">
 					<div class="password-card">
-						<div class="password-icon">🔒</div>
+						<div class="password-icon">
+							<Icon name="lock" size={64} />
+						</div>
 						<h1 class="password-title">Password Protected</h1>
 						<p class="password-subtitle">
 							This file is password protected. Enter the password to view and download.
@@ -164,7 +167,9 @@
 					</div>
 
 					<div class="file-preview-minimal">
-						<div class="file-icon-large">📄</div>
+						<div class="file-icon-large">
+							<Icon name="file" size={64} />
+						</div>
 						<h3 class="file-name">{fileData.name}</h3>
 						<p class="file-size">{formatFileSize(fileData.size)}</p>
 					</div>
@@ -177,7 +182,7 @@
 						<!-- File Header -->
 						<div class="file-header">
 							<div class="file-icon-wrapper-large">
-								<span class="file-icon-large">📄</span>
+								<Icon name="file" size={48} />
 							</div>
 							<div class="file-header-info">
 								<h1 class="file-title">{fileData.name}</h1>
@@ -261,7 +266,9 @@
 										</div>
 									</div>
 									<div class="preview-overlay">
-										<div class="preview-overlay-icon">👁️</div>
+										<div class="preview-overlay-icon">
+											<Icon name="eye" size={48} />
+										</div>
 										<p class="preview-overlay-text">Preview available after download</p>
 									</div>
 								</div>
@@ -300,22 +307,33 @@
 					<aside class="file-sidebar">
 						<!-- Security Card -->
 						<div class="sidebar-card">
-							<h3 class="sidebar-title">🛡️ Security</h3>
+							<h3 class="sidebar-title">
+								<Icon name="shield" size={20} />
+								Security
+							</h3>
 							<div class="security-checks">
 								<div class="security-check">
-									<span class="check-icon success">✓</span>
+									<span class="check-icon success">
+										<Icon name="check" size={16} />
+									</span>
 									<span class="check-text">Virus scan complete</span>
 								</div>
 								<div class="security-check">
-									<span class="check-icon success">✓</span>
+									<span class="check-icon success">
+										<Icon name="check" size={16} />
+									</span>
 									<span class="check-text">Encrypted transfer</span>
 								</div>
 								<div class="security-check">
-									<span class="check-icon success">✓</span>
+									<span class="check-icon success">
+										<Icon name="check" size={16} />
+									</span>
 									<span class="check-text">Password protected</span>
 								</div>
 								<div class="security-check">
-									<span class="check-icon success">✓</span>
+									<span class="check-icon success">
+										<Icon name="check" size={16} />
+									</span>
 									<span class="check-text">Safe to download</span>
 								</div>
 							</div>
